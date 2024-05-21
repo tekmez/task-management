@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ErrorPage from "../error-page";
 import AllTask from "../pages/AllTask";
@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="/all-tasks" replace />,
+      },
       {
         path: "all-tasks",
         element: <AllTask />,
