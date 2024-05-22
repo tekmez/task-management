@@ -1,13 +1,11 @@
-import { Button } from "@mantine/core";
+import MyDrawer from "./Drawer";
 import NavMenu from "./NavMenu";
 
 const Menu = () => {
   return (
     <>
       <NavMenu />
-      <Button fullWidth variant="light" color="indigo">
-        Create task
-      </Button>
+      <MyDrawer />
     </>
   );
 };

@@ -1,5 +1,7 @@
 import { Grid } from "@mantine/core";
 import TaskCard from "../components/Card";
+import { useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 interface Task {
   id: number;
   title: string;
@@ -52,11 +54,13 @@ const AllTask = () => {
       status: "waiting",
     },
   ];
+  const taskes = useAppSelector((state: RootState) => state.tasks.tasks);
+  console.log(taskes);
   return (
     <div>
       <Grid grow gutter="sm">
-        {tasks.map((task) => (
-          <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>
+        {tasks.map((task, i) => (
+          <Grid.Col key={i} span={{ base: 12, md: 6, lg: 3 }}>
             <TaskCard
               key={task.id}
               type={task.status}
