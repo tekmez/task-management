@@ -3,8 +3,8 @@ import { ScrollArea, Title } from "@mantine/core";
 import ThemeToggle from "./components/ThemeToggle";
 import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import NavMenu from "./components/NavMenu";
 import { Outlet } from "react-router-dom";
+import Menu from "./components/Menu";
 export default function App() {
   const [opened, { toggle }] = useDisclosure();
   return (
@@ -25,7 +25,7 @@ export default function App() {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md" component={ScrollArea}>
-        <NavMenu />
+        <Menu />
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />
