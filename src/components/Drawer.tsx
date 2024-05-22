@@ -1,5 +1,6 @@
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Button, Drawer } from "@mantine/core";
+import TaskForm from "./TaskForm";
 
 const MyDrawer = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -18,7 +19,7 @@ const MyDrawer = () => {
         position={matches ? "right" : "bottom"}
         radius={10}
       >
-        {/* Drawer content */}
+        <TaskForm />
       </Drawer>
 
       <Button fullWidth variant="light" color="indigo" onClick={open}>
