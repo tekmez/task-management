@@ -77,8 +77,9 @@ const TaskCard = ({ type, title, description }: TaskCardProps) => {
             {badgeProps.label}
           </Badge>
           <Group gap={0}>
-            {filteredActions.map((element) => (
+            {filteredActions.map((element, i) => (
               <Tooltip
+                key={i}
                 label={element.tooltip}
                 color={element.tooltipColor}
                 position="bottom"

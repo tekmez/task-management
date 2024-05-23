@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Task {
-    id: number;
+    id: string;
     title: string;
     description: string;
-    completed: boolean;
+    status: string;
 }
 
 interface TaskState {
@@ -23,15 +23,15 @@ const taskSlice = createSlice({
             state.tasks.push(action.payload);
         },
         updateTask: (state, action: PayloadAction<Task>) => {
-            const { id, title, description, completed } = action.payload;
+            const { id, title, description, status } = action.payload;
             const task = state.tasks.find((task) => task.id === id);
             if (task) {
                 task.title = title;
                 task.description = description;
-                task.completed = completed;
+                task.status = status;
             }
         },
-        deleteTask: (state, action: PayloadAction<number>) => {
+        deleteTask: (state, action: PayloadAction<string>) => {
             state.tasks = state.tasks.filter((task) => task.id !== action.payload);
         },
     },

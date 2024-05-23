@@ -2,8 +2,14 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Textarea } from "@mantine/core";
 import { zodResolver } from "mantine-form-zod-resolver";
 import schema from "../form-schema/taskSchema";
-
-const TaskForm = () => {
+import { v4 as uuid } from "uuid";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { addTask } from "../redux/reducers/taskReducer";
+import { RootState } from "../redux/store";
+const TaskForm = ({ closeDrawer }: { closeDrawer: () => void }) => {
+  const tasks = useAppSelector((state: RootState) => state.tasks.tasks);
+  const uniqId = uuid().slice(0, 8);
+  const dispatch = useAppDispatch();
   const form = useForm({
     mode: "uncontrolled",
     initialValues: { title: "", description: "" },
@@ -13,8 +19,16 @@ const TaskForm = () => {
   return (
     <form
       onSubmit={form.onSubmit((values) => {
-        console.log(values);
+        const task = { id: uniqId, status: "waiting", ...values };
+        const existingTask = tasks.find((task) => task.title === values.title);
+        if (existingTask) {
+          return form.setErrors({
+            title: "Task with this title already exists",
+          });
+        }
+        dispatch(addTask(task));
         form.reset();
+        closeDrawer();
       })}
     >
       <TextInput

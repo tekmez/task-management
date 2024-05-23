@@ -19,7 +19,7 @@ const MyDrawer = () => {
         position={matches ? "right" : "bottom"}
         radius={10}
       >
-        <TaskForm />
+        <TaskForm closeDrawer={close} />
       </Drawer>
 
       <Button fullWidth variant="light" color="indigo" onClick={open}>
