@@ -2,7 +2,10 @@ import { Grid } from "@mantine/core";
 import TaskCard from "../components/Card";
 import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
+import ActionModal from "../components/ActionModal";
+import { useDisclosure } from "@mantine/hooks";
 const AllTask = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks);
   console.log(tasks);
   return (
@@ -15,10 +18,12 @@ const AllTask = () => {
               type={task.status as "waiting" | "completed" | "canceled"}
               title={task.title}
               description={task.description}
+              open={open}
             />
           </Grid.Col>
         ))}
       </Grid>
+      <ActionModal opened={opened} close={close} />
     </div>
   );
 };

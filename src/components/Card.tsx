@@ -1,59 +1,15 @@
-import {
-  ActionIcon,
-  Badge,
-  Card,
-  Group,
-  ScrollArea,
-  Title,
-  Tooltip,
-  useMantineTheme,
-} from "@mantine/core";
+import { Badge, Card, Group, ScrollArea, Title } from "@mantine/core";
+import CardActions from "./CardActions";
 import "../styles/card.css";
-import { Ban, Check, FilePenLine, Trash2 } from "lucide-react";
 
 interface TaskCardProps {
   type: "waiting" | "completed" | "canceled";
   title: string;
   description: string;
+  open: () => void;
 }
 
-const TaskCard = ({ type, title, description }: TaskCardProps) => {
-  const theme = useMantineTheme();
-  const actionElements = [
-    {
-      icon: Check,
-      color: theme.colors.green[6],
-      tooltip: "complete",
-      tooltipColor: "green",
-      hideFor: ["completed", "canceled"],
-    },
-    {
-      icon: Ban,
-      color: theme.colors.indigo[6],
-      tooltip: "cancel",
-      tooltipColor: "indigo",
-      hideFor: ["canceled", "completed"],
-    },
-    {
-      icon: Trash2,
-      color: theme.colors.red[6],
-      tooltip: "delete",
-      tooltipColor: "red",
-      hideFor: [],
-    },
-    {
-      icon: FilePenLine,
-      color: theme.colors.gray[6],
-      tooltip: "edit",
-      tooltipColor: "gray",
-      hideFor: ["completed", "canceled"],
-    },
-  ];
-
-  const filteredActions = actionElements.filter(
-    (element) => !element.hideFor.includes(type)
-  );
-
+const TaskCard = ({ type, title, description, open }: TaskCardProps) => {
   const badgeProps = {
     waiting: { color: "orange", label: "waiting" },
     completed: { color: "green", label: "completed" },
@@ -77,18 +33,7 @@ const TaskCard = ({ type, title, description }: TaskCardProps) => {
             {badgeProps.label}
           </Badge>
           <Group gap={0}>
-            {filteredActions.map((element, i) => (
-              <Tooltip
-                key={i}
-                label={element.tooltip}
-                color={element.tooltipColor}
-                position="bottom"
-              >
-                <ActionIcon variant="subtle" color="gray">
-                  <element.icon color={element.color} />
-                </ActionIcon>
-              </Tooltip>
-            ))}
+            <CardActions open={open} type={type} />
           </Group>
         </Group>
       </Card.Section>
