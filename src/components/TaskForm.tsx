@@ -1,11 +1,13 @@
-import { useForm } from "@mantine/form";
 import { TextInput, Button, Textarea } from "@mantine/core";
 import { zodResolver } from "mantine-form-zod-resolver";
-import schema from "../form-schema/taskSchema";
 import { v4 as uuid } from "uuid";
+import schema from "../form-schema/taskSchema";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addTask } from "../redux/reducers/taskReducer";
 import { RootState } from "../redux/store";
+import { AddTaskProps } from "../types/taskTypes";
+import { useForm } from "@mantine/form";
+
 const TaskForm = ({ closeDrawer }: { closeDrawer: () => void }) => {
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks);
   const uniqId = uuid().slice(0, 8);
@@ -18,8 +20,8 @@ const TaskForm = ({ closeDrawer }: { closeDrawer: () => void }) => {
 
   return (
     <form
-      onSubmit={form.onSubmit((values) => {
-        const task = { id: uniqId, status: "waiting", ...values };
+      onSubmit={form.onSubmit((values: AddTaskProps) => {
+        const task = { id: uniqId, status: "waiting" as const, ...values };
         const existingTask = tasks.find((task) => task.title === values.title);
         if (existingTask) {
           return form.setErrors({

@@ -1,8 +1,27 @@
 import { ActionIcon, Tooltip, useMantineTheme } from "@mantine/core";
 import { Ban, Check, FilePenLine, Trash2 } from "lucide-react";
+import { useAppDispatch } from "../redux/hooks";
+import { openModal } from "../redux/reducers/modalReducer";
+import { ActionType, Task } from "../types/taskTypes";
 
-const CardActions = ({ type, open }: { type: string; open: () => void }) => {
+const CardActions = ({ type, task }: { type: string; task: Task }) => {
   const theme = useMantineTheme();
+  const dispatch = useAppDispatch();
+  const handleActionClick = (actionType: ActionType) => {
+    switch (actionType) {
+      case "delete":
+        dispatch(openModal({ isOpen: true, actionType: "delete", task }));
+        break;
+      case "complete":
+        dispatch(openModal({ isOpen: true, actionType: "complete", task }));
+        break;
+      case "cancel":
+        dispatch(openModal({ isOpen: true, actionType: "cancel", task }));
+        break;
+      default:
+        return;
+    }
+  };
   const actionElements = [
     {
       icon: Check,
@@ -10,7 +29,7 @@ const CardActions = ({ type, open }: { type: string; open: () => void }) => {
       tooltip: "complete",
       tooltipColor: "green",
       hideFor: ["completed", "canceled"],
-      onclick: () => open(),
+      onclick: () => handleActionClick("complete"),
     },
     {
       icon: Ban,
@@ -18,7 +37,7 @@ const CardActions = ({ type, open }: { type: string; open: () => void }) => {
       tooltip: "cancel",
       tooltipColor: "indigo",
       hideFor: ["canceled", "completed"],
-      onclick: () => console.log("canceled"),
+      onclick: () => handleActionClick("cancel"),
     },
     {
       icon: Trash2,
@@ -26,7 +45,7 @@ const CardActions = ({ type, open }: { type: string; open: () => void }) => {
       tooltip: "delete",
       tooltipColor: "red",
       hideFor: [],
-      onclick: () => open(),
+      onclick: () => handleActionClick("delete"),
     },
     {
       icon: FilePenLine,
