@@ -6,7 +6,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Outlet } from "react-router-dom";
 import Menu from "./components/Menu";
 export default function App() {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { close, toggle }] = useDisclosure();
   return (
     <AppShell
       header={{ height: { base: 60, md: 70, lg: 80 } }}
@@ -25,7 +25,7 @@ export default function App() {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md" component={ScrollArea}>
-        <Menu />
+        <Menu closeNavMenu={close} />
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />

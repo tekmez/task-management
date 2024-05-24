@@ -16,7 +16,7 @@ const data = [
   { icon: CheckCheck, label: "Completed Tasks", href: "completed-tasks" },
   { icon: Ban, label: "Canceled Tasks", href: "canceled-tasks" },
 ];
-const NavMenu = () => {
+const NavMenu = ({ closeNavMenu }: { closeNavMenu: () => void }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
   const items = data.map((item, index) => (
@@ -28,6 +28,7 @@ const NavMenu = () => {
       onClick={() => {
         navigate(item.href);
         setActive(index);
+        closeNavMenu();
       }}
       color="indigo"
       styles={{
