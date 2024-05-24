@@ -22,7 +22,7 @@ const AllTask = () => {
           </Chip>
         </Group>
       </Chip.Group>
-      <PageTemplate tasks={filteredTasks.length > 0 ? filteredTasks : tasks} />;
+      <PageTemplate tasks={filteredTasks.length > 0 ? filteredTasks : tasks} />
     </>
   );
 };
