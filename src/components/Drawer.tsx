@@ -12,7 +12,7 @@ const MyDrawer = () => {
         onClose={close}
         title="Create Task"
         transitionProps={{
-          transition: "rotate-left",
+          transition: "slide-left",
           duration: 150,
           timingFunction: "linear",
         }}

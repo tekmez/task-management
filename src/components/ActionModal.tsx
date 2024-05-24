@@ -1,7 +1,7 @@
 import { Alert, Button, Flex, Modal } from "@mantine/core";
 import { CircleAlert } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { closeModal } from "../redux/reducers/modalReducer";
+import { closeModal } from "../redux/reducers/actionModalReducer";
 import {
   cancelTask,
   completeTask,
@@ -53,9 +53,9 @@ const ActionModal = () => {
       >
         <Flex direction={"column"}>
           <p>
-            {`Are you sure you want to ${actionProps.title.toLowerCase()} the task "${
+            {`Are you sure you want to ${actionProps.title.toLowerCase()} the task " ${
               task.title
-            }"?`}
+            } " ?`}
           </p>
           <Flex justify={"end"} gap={8}>
             <Button onClick={close} color="gray">

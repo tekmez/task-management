@@ -3,9 +3,9 @@ import TaskCard from "../components/Card";
 import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import ActionModal from "../components/ActionModal";
+import OverviewModal from "../components/OverviewModal";
 const AllTask = () => {
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks);
-  console.log(tasks);
   return (
     <div>
       <Grid grow gutter="sm">
@@ -16,6 +16,7 @@ const AllTask = () => {
         ))}
       </Grid>
       <ActionModal />
+      <OverviewModal />
     </div>
   );
 };

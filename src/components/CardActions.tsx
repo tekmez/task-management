@@ -1,13 +1,14 @@
 import { ActionIcon, Tooltip, useMantineTheme } from "@mantine/core";
 import { Ban, Check, FilePenLine, Trash2 } from "lucide-react";
 import { useAppDispatch } from "../redux/hooks";
-import { openModal } from "../redux/reducers/modalReducer";
-import { ActionType, Task } from "../types/taskTypes";
+import { openModal } from "../redux/reducers/actionModalReducer";
+import { ActionTypeAll, Task } from "../types/taskTypes";
+import { openOverViewModal } from "../redux/reducers/overViewModalReducer";
 
 const CardActions = ({ type, task }: { type: string; task: Task }) => {
   const theme = useMantineTheme();
   const dispatch = useAppDispatch();
-  const handleActionClick = (actionType: ActionType) => {
+  const handleActionClick = (actionType: ActionTypeAll) => {
     switch (actionType) {
       case "delete":
         dispatch(openModal({ isOpen: true, actionType: "delete", task }));
@@ -17,6 +18,9 @@ const CardActions = ({ type, task }: { type: string; task: Task }) => {
         break;
       case "cancel":
         dispatch(openModal({ isOpen: true, actionType: "cancel", task }));
+        break;
+      case "edit":
+        dispatch(openOverViewModal({ isOpen: true, task }));
         break;
       default:
         return;
@@ -53,7 +57,7 @@ const CardActions = ({ type, task }: { type: string; task: Task }) => {
       tooltip: "edit",
       tooltipColor: "gray",
       hideFor: ["completed", "canceled"],
-      onclick: () => console.log("edited"),
+      onclick: () => handleActionClick("edit"),
     },
   ];
   const filteredActions = actionElements.filter(

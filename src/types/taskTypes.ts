@@ -1,5 +1,6 @@
 type status = "waiting" | "completed" | "canceled";
 export type ActionType = "delete" | "complete" | "cancel";
+export type ActionTypeAll = "delete" | "complete" | "cancel" | "edit";
 export interface Task {
   id: string;
   title: string;
@@ -19,5 +20,9 @@ export interface AddTaskProps {
 export interface ModalState {
   isOpen: boolean;
   actionType: ActionType;
+  task: Task;
+}
+export interface OverviewModalState {
+  isOpen: boolean;
   task: Task;
 }
