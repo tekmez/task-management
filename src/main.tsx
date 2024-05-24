@@ -6,9 +6,7 @@ import { MantineProvider } from "@mantine/core";
 import { theme } from "./theme";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import { inject } from "@vercel/analytics";
 
-inject();
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
