@@ -54,7 +54,7 @@ const CardActions = ({ type, task }: { type: string; task: Task }) => {
     {
       icon: FilePenLine,
       color: theme.colors.gray[6],
-      tooltip: "edit",
+      tooltip: "overview & edit",
       tooltipColor: "gray",
       hideFor: ["completed", "canceled"],
       onclick: () => handleActionClick("edit"),
