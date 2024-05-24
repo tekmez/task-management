@@ -1,7 +1,7 @@
 import { TextInput, Button, Textarea } from "@mantine/core";
 import { zodResolver } from "mantine-form-zod-resolver";
 import { v4 as uuid } from "uuid";
-import schema from "../form-schema/taskSchema";
+import schema from "../schema/taskSchema";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addTask } from "../redux/reducers/taskReducer";
 import { RootState } from "../redux/store";
@@ -36,12 +36,14 @@ const TaskForm = ({ closeDrawer }: { closeDrawer: () => void }) => {
       <TextInput
         label="Title"
         placeholder="Title"
+        withAsterisk
         key={form.key("title")}
         {...form.getInputProps("title")}
       />
       <Textarea
         mt="sm"
         label="Description"
+        withAsterisk
         placeholder="Description"
         key={form.key("description")}
         {...form.getInputProps("description")}

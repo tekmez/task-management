@@ -1,7 +1,7 @@
 import { Modal, TextInput, Button, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "mantine-form-zod-resolver";
-import schema from "../form-schema/taskSchema";
+import schema from "../schema/taskSchema";
 import { AddTaskProps } from "../types/taskTypes";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
@@ -53,7 +53,7 @@ const OverviewModal = () => {
           label="Title"
           placeholder="Title"
           key={form.key("title")}
-          defaultValue={task.title}
+          withAsterisk
           {...form.getInputProps("title")}
         />
         <Textarea
@@ -61,7 +61,7 @@ const OverviewModal = () => {
           label="Description"
           placeholder="Description"
           key={form.key("description")}
-          defaultValue={task.description}
+          withAsterisk
           minRows={8}
           maxRows={12}
           autosize
